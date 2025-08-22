@@ -34,7 +34,19 @@ public class PrintJobQueue {
         servedToday++;
         jobs[0] = jobs[--size];
         if (size > 0) bubbleDown(0);
+
+        // Set dequeue time
         result.setDequeueTime(LocalDateTime.now());
+
+        // Add to history for statistics - THIS WAS MISSING!
+        if (historySize < historyJobs.length) {
+            historyJobs[historySize++] = result;
+        } else {
+            // Shift array left to make room (simple implementation)
+            System.arraycopy(historyJobs, 1, historyJobs, 0, historyJobs.length - 1);
+            historyJobs[historyJobs.length - 1] = result;
+        }
+
         return result;
     }
 
@@ -42,7 +54,6 @@ public class PrintJobQueue {
     public boolean isEmpty() { return size == 0; }
     public boolean isFull() { return size >= capacity; }
     public int getSize() { return size; }
-
 
     // Search functionality
     public PrintJob[] searchByFileName(String fileName) {
@@ -81,18 +92,26 @@ public class PrintJobQueue {
 
     public double getAverageWaitingTime() {
         if (historySize == 0) return 0;
-        long totalMinutes = 0;
-        int count = 0;
+
+        long totalSeconds = 0;
+        int validJobs = 0;
+
         for (int i = 0; i < historySize; i++) {
             PrintJob job = historyJobs[i];
-            LocalDateTime submit = job.getSubmissionTime();
-            LocalDateTime dequeue = job.getDequeueTime();
-            if (submit != null && dequeue != null) {
-                totalMinutes += Duration.between(submit, dequeue).toMinutes();
-                count++;
+            LocalDateTime submitTime = job.getSubmissionTime();
+            LocalDateTime dequeueTime = job.getDequeueTime();
+
+            if (submitTime != null && dequeueTime != null) {
+                Duration waitDuration = Duration.between(submitTime, dequeueTime);
+                totalSeconds += waitDuration.toSeconds();
+                validJobs++;
             }
         }
-        return count == 0 ? 0 : (double) totalMinutes / count;
+
+        if (validJobs == 0) return 0;
+
+        // Return average in minutes (more readable)
+        return (double) totalSeconds / validJobs / 60.0;
     }
 
     public int getTodayServedCount() { return servedToday; }
@@ -102,17 +121,23 @@ public class PrintJobQueue {
         double capacity = getCapacityPercentage();
         double waitTime = getAverageWaitingTime();
 
+        // Capacity impact
         if (capacity > 90) score -= 30;
         else if (capacity > 70) score -= 15;
 
+        // Wait time impact (in minutes)
         if (waitTime > 60) score -= 25;
         else if (waitTime > 30) score -= 10;
+        else if (waitTime > 10) score -= 5;
 
+        // Priority distribution impact
         double[] dist = getPriorityDistribution();
-        if (dist[0] > 60) score -= 15; // too many HIGH priority
+        if (dist[0] > 60) score -= 15; // too many HIGH priority jobs
 
         return Math.max(0, score);
     }
+
+
 
     private int[] getPriorityCounts() {
         int[] counts = {0, 0, 0}; // HIGH, NORMAL, LOW
