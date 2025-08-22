@@ -93,25 +93,16 @@ public class PrintJobQueue {
     public double getAverageWaitingTime() {
         if (historySize == 0) return 0;
 
-        long totalSeconds = 0;
-        int validJobs = 0;
+        double totalMinutes = 0;
 
         for (int i = 0; i < historySize; i++) {
             PrintJob job = historyJobs[i];
-            LocalDateTime submitTime = job.getSubmissionTime();
-            LocalDateTime dequeueTime = job.getDequeueTime();
-
-            if (submitTime != null && dequeueTime != null) {
-                Duration waitDuration = Duration.between(submitTime, dequeueTime);
-                totalSeconds += waitDuration.toSeconds();
-                validJobs++;
+            if (job.getSubmissionTime() != null && job.getDequeueTime() != null) {
+                long seconds = Duration.between(job.getSubmissionTime(), job.getDequeueTime()).toSeconds();
+                totalMinutes += seconds / 60.0;
             }
         }
-
-        if (validJobs == 0) return 0;
-
-        // Return average in minutes (more readable)
-        return (double) totalSeconds / validJobs / 60.0;
+        return totalMinutes / historySize;
     }
 
     public int getTodayServedCount() { return servedToday; }
