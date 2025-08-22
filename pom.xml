@@ -21,6 +21,7 @@
     <module>campus-app</module>
     <module>api</module>
       <module>Digital Library System</module>
+      <module>RoomBookingSystem</module>
   </modules>
 
   <dependencyManagement>
