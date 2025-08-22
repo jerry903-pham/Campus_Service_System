@@ -18,12 +18,9 @@ public class PrintJobManager {
         System.out.println("       PRINT JOB MANAGER SYSTEM");
         System.out.println("=".repeat(45));
 
-        // Quick stats
         System.out.println("📊 " + service.getBasicStats());
-        displayCapacityBar();
-
         if (!service.isEmpty()) {
-            System.out.println("⭐ Next: " + service.getNextJob().toString());
+            System.out.println("⭐ Next: " + service.getNextJob());
         } else {
             System.out.println("📭 No jobs in queue");
         }
@@ -169,15 +166,10 @@ public class PrintJobManager {
         System.out.printf("🟡 NORMAL: %s %.1f%%\n", createProgressBar(dist[1], 20), dist[1]);
         System.out.printf("🟢 LOW   : %s %.1f%%\n", createProgressBar(dist[2], 20), dist[2]);
 
-        System.out.println("\n⏰ TIME STATS");
-        System.out.println("-".repeat(45));
-        System.out.printf("Today served: %d jobs\n", service.getTodayServedCount());
-        System.out.printf("Avg wait time: %.1f minutes\n", service.getAverageWaitingTime());
-
         if (!service.isEmpty()) {
             System.out.println("\n⏭️ NEXT JOB");
             System.out.println("-".repeat(45));
-            System.out.println(service.getNextJob().toString());
+            System.out.println(service.getNextJob());
         }
     }
 
@@ -229,13 +221,14 @@ public class PrintJobManager {
                         break;
                     case 6:
                         displayHealthMonitor();
+                        break;
                     case 7:
                         System.out.println("👋 Thank you for using Print Job Manager System!");
                         System.out.println("Goodbye!");
                         scanner.close();
                         return;
                     default:
-                        System.out.println("❌ Invalid option! Please select 1-6.");
+                        System.out.println("❌ Invalid option! Please select 1-7.");
                 }
 
                 System.out.println("\nPress Enter to continue...");

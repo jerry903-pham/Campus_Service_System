@@ -2,17 +2,22 @@ package com.greenwich.university.repository;
 
 import com.greenwich.university.domain.PrintJob;
 import java.time.LocalDateTime;
+import java.time.Duration;
 
 public class PrintJobQueue {
     public PrintJob[] jobs;
     private int size;
     private final int capacity;
     private int servedToday = 0;
+    private PrintJob[] historyJobs;
+    private int historySize = 0;
 
     public PrintJobQueue(int capacity) {
         this.capacity = capacity;
         this.jobs = new PrintJob[capacity];
         this.size = 0;
+        this.historyJobs = new PrintJob[capacity * 10];
+        this.historySize = 0;
     }
 
     // Core operations
@@ -29,6 +34,7 @@ public class PrintJobQueue {
         servedToday++;
         jobs[0] = jobs[--size];
         if (size > 0) bubbleDown(0);
+        result.setDequeueTime(LocalDateTime.now());
         return result;
     }
 
@@ -74,13 +80,19 @@ public class PrintJobQueue {
     }
 
     public double getAverageWaitingTime() {
-        if (isEmpty()) return 0;
-        LocalDateTime now = LocalDateTime.now();
+        if (historySize == 0) return 0;
         long totalMinutes = 0;
-        for (int i = 0; i < size; i++) {
-            totalMinutes += java.time.Duration.between(jobs[i].getSubmissionTime(), now).toMinutes();
+        int count = 0;
+        for (int i = 0; i < historySize; i++) {
+            PrintJob job = historyJobs[i];
+            LocalDateTime submit = job.getSubmissionTime();
+            LocalDateTime dequeue = job.getDequeueTime();
+            if (submit != null && dequeue != null) {
+                totalMinutes += Duration.between(submit, dequeue).toMinutes();
+                count++;
+            }
         }
-        return (double) totalMinutes / size;
+        return count == 0 ? 0 : (double) totalMinutes / count;
     }
 
     public int getTodayServedCount() { return servedToday; }
