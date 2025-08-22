@@ -99,7 +99,7 @@ public class PrintJobQueue {
             PrintJob job = historyJobs[i];
             if (job.getSubmissionTime() != null && job.getDequeueTime() != null) {
                 long seconds = Duration.between(job.getSubmissionTime(), job.getDequeueTime()).toSeconds();
-                totalMinutes += seconds / 60.0;
+                totalMinutes += seconds;
             }
         }
         return totalMinutes / historySize;
@@ -109,27 +109,16 @@ public class PrintJobQueue {
 
     public int getHealthScore() {
         int score = 100;
-        double capacity = getCapacityPercentage();
         double waitTime = getAverageWaitingTime();
 
-        // Capacity impact
-        if (capacity > 90) score -= 30;
-        else if (capacity > 70) score -= 15;
-
-        // Wait time impact (in minutes)
-        if (waitTime > 60) score -= 25;
-        else if (waitTime > 30) score -= 10;
-        else if (waitTime > 10) score -= 5;
-
-        // Priority distribution impact
-        double[] dist = getPriorityDistribution();
-        if (dist[0] > 60) score -= 15; // too many HIGH priority jobs
-
-        return Math.max(0, score);
+        if (waitTime < 10) {
+            return 100; // Excellent (80-100 range)
+        } else if (waitTime < 20) {
+            return 70;  // Good (60-79 range)
+        } else {
+            return 40;  // Needs Attention (0-59 range)
+        }
     }
-
-
-
     private int[] getPriorityCounts() {
         int[] counts = {0, 0, 0}; // HIGH, NORMAL, LOW
         for (int i = 0; i < size; i++) {
