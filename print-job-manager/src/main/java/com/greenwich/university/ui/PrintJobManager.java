@@ -210,14 +210,11 @@ public class PrintJobManager {
                     case 7:
                         System.out.println("👋 Thank you for using Print Job Manager System!");
                         System.out.println("Goodbye!");
-                        scanner.close();
                         return;
                     default:
                         System.out.println("❌ Invalid option! Please select 1-7.");
-                }
 
-                System.out.println("\nPress Enter to continue...");
-                scanner.nextLine();
+                }
 
             } catch (NumberFormatException e) {
                 System.out.println("❌ Please enter a valid number!");

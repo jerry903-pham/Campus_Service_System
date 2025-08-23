@@ -1,85 +1,79 @@
-package com.greenwich.university.menu;
+package com.greenwich.university;
 
 import java.util.Scanner;
 
-// Imports for your modules — fill in the correct main class for each module
-import com.greenwich.university.CourseRegistration.Main;         // Course Registration
-import com.greenwich.university.LibrarySystem;       // Digital Library System
-import com.greenwich.university.RoomBookingApp;          // Room Booking System
-import com.greenwich.university.LostAndFoundSystem;          // Assignment Planner
-import com.greenwich.university.ui.Main            // Print Job Manager
+public class Main {
+    private static Scanner scanner = new Scanner(System.in);
 
-public class MainMenu {
+    public static void main(String[] args) {
+        System.out.println("🎓 Welcome to Greenwich University Campus System!");
 
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void showMenu() {
-        int choice = -1;
-
-        while (choice != 0) {
-            System.out.println("=== Campus Service System ===");
-            System.out.println("1. Course Registration");
-            System.out.println("2. Digital Library System");
-            System.out.println("3. Room Booking System");
-            System.out.println("4. Assignment Planner");
-            System.out.println("5. Campus Event Calendar");
-            System.out.println("6. Print Job Manager");
-            System.out.println("0. Exit");
-            System.out.print("Enter your choice: ");
-
+        while (true) {
+            displayMainMenu();
             try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
+                int choice = Integer.parseInt(scanner.nextLine().trim());
 
-            switch (choice) {
-                case 1 -> launchCourseRegistration();
-                case 2 -> launchDigitalLibrarySystem();
-                case 3 -> launchRoomBookingSystem();
-                case 4 -> launchAssignmentPlanner();
-                case 5 -> launchCampusEventCalendar();
-                case 6 -> launchPrintJobManager();
-                case 0 -> System.out.println("Exiting. Goodbye!");
-                default -> System.out.println("Invalid choice. Try again.");
+                switch (choice) {
+                    case 1:
+                        runPrintJobManager();
+                        break;
+                    case 2:
+                        runCourseRegistration();
+                        break;
+                    case 3:
+                        System.out.println("👥 Student Management System - Coming Soon!");
+                        break;
+                    case 4:
+                        System.out.println("👋 Thank you for using Greenwich University Campus System!");
+                        scanner.close();
+                        return;
+                    default:
+                        System.out.println("❌ Invalid option! Please select 1-4.");
+                }
+
+                System.out.println("\nPress Enter to return to main menu...");
+                scanner.nextLine();
+
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Please enter a valid number!");
+            } catch (Exception e) {
+                System.err.println("❌ Error occurred: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
 
-    private static void launchCourseRegistration() {
-        System.out.println("Launching Course Registration...");
-        Main.main(new String[]{});  // Call the Main class of CourseRegistration
+    private static void displayMainMenu() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("       GREENWICH UNIVERSITY CAMPUS SYSTEM");
+        System.out.println("=".repeat(50));
+        System.out.println("1. 🖨️  Print Job Manager");
+        System.out.println("2. 📚 Course Registration");
+        System.out.println("3. 👥 Student Management (Coming Soon)");
+        System.out.println("4. 🚪 Exit");
+        System.out.println("=".repeat(50));
+        System.out.print("Select option (1-4): ");
     }
 
-    private static void launchDigitalLibrarySystem() {
-        System.out.println("Launching Digital Library System...");
-        Main.main(new String[]{});  // Call the Main class of DigitalLibrarySystem
+    private static void runPrintJobManager() {
+        try {
+            System.out.println("\n🖨️ Starting Print Job Manager...");
+            PrintJobManagerAPI printAPI = new PrintJobManagerAPI();
+            printAPI.start();
+        } catch (Exception e) {
+            System.err.println("❌ Error running Print Job Manager: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    private static void launchRoomBookingSystem() {
-        System.out.println("Launching Room Booking System...");
-        Main.main(new String[]{});  // Call the Main class of RoomBookingSystem
-    }
-
-    private static void launchAssignmentPlanner() {
-        System.out.println("Launching Assignment Planner...");
-        Main.main(new String[]{});  // Call the Main class of AssignmentPlanner
-    }
-
-    private static void launchCampusEventCalendar() {
-        System.out.println("Launching Campus Event Calendar...");
-        Main.main(new String[]{});  // Call the Main class of CampusEventCalendar
-    }
-
-    private static void launchPrintJobManager() {
-        System.out.println("Launching Print Job Manager...");
-        Main.main(new String[]{});  // Call the Main class of PrintJobManager
-    }
-
-    public static void main(String[] args) {
-        showMenu();
+    private static void runCourseRegistration() {
+        try {
+            System.out.println("\n📚 Starting Course Registration...");
+            CourseRegistrationAPI courseAPI = new CourseRegistrationAPI();
+            courseAPI.start();
+        } catch (Exception e) {
+            System.err.println("❌ Error running Course Registration: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
-
-

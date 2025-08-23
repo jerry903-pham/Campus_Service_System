@@ -8,8 +8,8 @@ import util.InputValidator;
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class registrationMain {
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         CourseManager courseManager = new CourseManager();
         RegistrationSystem registrationSystem = new RegistrationSystem();
