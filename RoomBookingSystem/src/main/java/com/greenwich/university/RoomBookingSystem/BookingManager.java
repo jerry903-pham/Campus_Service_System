@@ -1,6 +1,7 @@
-package com.greenwich.university;
+package com.greenwich.university.RoomBookingSystem;
 
 // Import classes to represent dates and times
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 

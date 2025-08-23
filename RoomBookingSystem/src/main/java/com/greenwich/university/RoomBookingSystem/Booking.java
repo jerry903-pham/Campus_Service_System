@@ -1,4 +1,4 @@
-package com.greenwich.university;
+package com.greenwich.university.RoomBookingSystem;
 
 // Importing classes from java.time package to handle dates and times
 import java.time.LocalDate;
