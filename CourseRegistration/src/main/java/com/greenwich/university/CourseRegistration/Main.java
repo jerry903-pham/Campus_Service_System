@@ -1,3 +1,5 @@
+package com.greenwich.university.CourseRegistration;
+
 import model.Course;
 import model.Student;
 import service.CourseManager;
