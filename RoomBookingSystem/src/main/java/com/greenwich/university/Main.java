@@ -1,4 +1,5 @@
 package com.greenwich.university;
+
 // Import classes to handle dates, times, formatting, and user input
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // RoomBookingApp is the main console application (UI) for the Room Booking System
-public class RoomBookingApp {
+public class Main {
 
     // Formatter for parsing and displaying times in "hour:minute" format (24h clock)
     private static final DateTimeFormatter TF = DateTimeFormatter.ofPattern("H:mm");
