@@ -69,7 +69,7 @@ public class PrintJobQueue {
         return result;
     }
 
-    // Analytics - simplified
+
     public String getStats() {
         int[] counts = getPriorityCounts();
         return String.format("Jobs: %d/%d | HIGH:%d NORMAL:%d LOW:%d",

@@ -1,4 +1,5 @@
 package com.greenwich.university;
+
 // Import classes to handle dates, times, formatting, and user input
 import java.time.LocalDate;
 import java.time.LocalTime;
