@@ -92,9 +92,7 @@ public class PrintJobQueue {
 
     public double getAverageWaitingTime() {
         if (historySize == 0) return 0;
-
         double totalMinutes = 0;
-
         for (int i = 0; i < historySize; i++) {
             PrintJob job = historyJobs[i];
             if (job.getSubmissionTime() != null && job.getDequeueTime() != null) {
