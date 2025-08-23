@@ -2,11 +2,12 @@ package com.greenwich.university.menu;
 
 import java.util.Scanner;
 
-// Import your modules here
-// Example:
-// import com.greenwich.university.courseregistration.CourseRegistration;
-// import com.greenwich.university.roombookingsystem.RoomBookingSystem;
-// import com.greenwich.university.digitallibrary.DigitalLibrarySystem;
+// Imports for your modules — fill in the correct main class for each module
+import com.greenwich.university.CourseRegistration.Main;         // Course Registration
+import com.greenwich.university.LibrarySystem;       // Digital Library System
+import com.greenwich.university.RoomBookingApp;          // Room Booking System
+import com.greenwich.university.LostAndFoundSystem;          // Assignment Planner
+import com.greenwich.university.ui.Main            // Print Job Manager
 
 public class MainMenu {
 
@@ -34,66 +35,51 @@ public class MainMenu {
             }
 
             switch (choice) {
-                case 1:
-                    launchCourseRegistration();
-                    break;
-                case 2:
-                    launchDigitalLibrarySystem();
-                    break;
-                case 3:
-                    launchRoomBookingSystem();
-                    break;
-                case 4:
-                    launchAssignmentPlanner();
-                    break;
-                case 5:
-                    launchCampusEventCalendar();
-                    break;
-                case 6:
-                    launchPrintJobManager();
-                    break;
-                case 0:
-                    System.out.println("Exiting. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
+                case 1 -> launchCourseRegistration();
+                case 2 -> launchDigitalLibrarySystem();
+                case 3 -> launchRoomBookingSystem();
+                case 4 -> launchAssignmentPlanner();
+                case 5 -> launchCampusEventCalendar();
+                case 6 -> launchPrintJobManager();
+                case 0 -> System.out.println("Exiting. Goodbye!");
+                default -> System.out.println("Invalid choice. Try again.");
             }
         }
     }
 
     private static void launchCourseRegistration() {
         System.out.println("Launching Course Registration...");
-        // TODO: Call your CourseRegistration main class or methods
-        // Example:
-        // CourseRegistration.main(new String[]{});
+        Main.main(new String[]{});  // Call the Main class of CourseRegistration
     }
 
     private static void launchDigitalLibrarySystem() {
         System.out.println("Launching Digital Library System...");
-        // TODO: Call DigitalLibrarySystem methods
+        Main.main(new String[]{});  // Call the Main class of DigitalLibrarySystem
     }
 
     private static void launchRoomBookingSystem() {
         System.out.println("Launching Room Booking System...");
-        // TODO: Call RoomBookingSystem methods
+        Main.main(new String[]{});  // Call the Main class of RoomBookingSystem
     }
 
     private static void launchAssignmentPlanner() {
         System.out.println("Launching Assignment Planner...");
-        // TODO: Call AssignmentPlanner methods
+        Main.main(new String[]{});  // Call the Main class of AssignmentPlanner
     }
 
     private static void launchCampusEventCalendar() {
         System.out.println("Launching Campus Event Calendar...");
-        // TODO: Call CampusEventCalendar methods
+        Main.main(new String[]{});  // Call the Main class of CampusEventCalendar
     }
 
     private static void launchPrintJobManager() {
         System.out.println("Launching Print Job Manager...");
-        // TODO: Call PrintJobManager methods
+        Main.main(new String[]{});  // Call the Main class of PrintJobManager
     }
 
     public static void main(String[] args) {
         showMenu();
     }
 }
+
+
