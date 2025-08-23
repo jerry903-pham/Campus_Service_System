@@ -24,6 +24,7 @@
     <module>RoomBookingSystem</module>
     <module>CourseRegistration</module>
       <module>LostAndFoundTracker</module>
+      <module>LostAndFoundTracker</module>
   </modules>
 
   <dependencyManagement>
