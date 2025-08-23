@@ -1,4 +1,4 @@
-package com.greenwich.university;
+package com.greenwich.university.Library;
 import java.util.Scanner;
 
 public class Main {
