@@ -1,8 +1,8 @@
 package com.greenwich.university.Library;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class mainDigitalLibrarySystem {
+    public void run() {
         Scanner sc = new Scanner(System.in);
         Library library = new Library(100); // Max 100 books
 

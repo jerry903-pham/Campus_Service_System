@@ -25,6 +25,7 @@
     <module>CourseRegistration</module>
       <module>LostAndFoundTracker</module>
 
+
   </modules>
 
   <dependencyManagement>

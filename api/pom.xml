@@ -21,8 +21,21 @@
             <artifactId>CourseRegistration</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
-
-        <!-- Dependency to Print Job Manager module -->
+        <dependency>
+            <groupId>com.greenwich.university</groupId>
+            <artifactId>DigitalLibrarySystem</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.greenwich.university</groupId>
+            <artifactId>LostAndFoundTracker</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.greenwich.university</groupId>
+            <artifactId>RoomBookingSystem</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.greenwich.university</groupId>
             <artifactId>print-job-manager</artifactId>

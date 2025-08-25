@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // RoomBookingApp is the main console application (UI) for the Room Booking System
-public class Main {
+public class mainRoomBookingSystem {
 
     // Formatter for parsing and displaying times in "hour:minute" format (24h clock)
     private static final DateTimeFormatter TF = DateTimeFormatter.ofPattern("H:mm");
@@ -16,7 +16,7 @@ public class Main {
     private static final Scanner sc = new Scanner(System.in);
 
     // Main method: entry point of the program
-    public static void main(String[] args) {
+    public void run() {
         BookingManager mgr = new BookingManager(); // Controller object to manage bookings
         while (true) { // Infinite loop for the main menu
             // Display main menu options
