@@ -58,7 +58,6 @@ public class mainDigitalLibrarySystem {
 
                 case 7:
                     System.out.println("Exiting the system. Goodbye!");
-                    sc.close();
                     return;
 
                 default:
