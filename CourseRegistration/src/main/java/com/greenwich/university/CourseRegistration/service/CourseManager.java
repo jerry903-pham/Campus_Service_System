@@ -59,7 +59,7 @@ public class CourseManager {
         System.out.println("---------------------------------------------------------------");
     }
 
-    // --- Option 4: Show courses ranked by popularity
+    // option 4: Show courses ranked by popularity
     public void printPopularCourses() {
         MyHeap<Course> heap = new MyHeap<>(new MyComparator<>() {
             @Override

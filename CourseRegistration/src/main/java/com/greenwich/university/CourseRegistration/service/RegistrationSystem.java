@@ -24,7 +24,27 @@ public class RegistrationSystem {
     public boolean register(String studentId, String courseCode) {
         Student s = students.get(studentId);
         Course c = courses.get(courseCode);
-        if (s == null || c == null) return false;
+        if (s == null || c == null) {
+            System.out.println("Error: Student or course not found.");
+            return false;
+        }
+
+        // --- The Fix ---
+        // Check if the student is already registered for the course.
+        // The student's registeredCourses list is where we should check.
+        boolean alreadyRegistered = false;
+        for (String code : s.getRegisteredCourses()) {
+            if (code.equals(courseCode)) {
+                alreadyRegistered = true;
+                break;
+            }
+        }
+
+        if (alreadyRegistered) {
+            System.out.println("Hold up, " + s.getName() + " is already registered for " + c.getName() + ".");
+            return false;
+        }
+        // --- End of Fix ---
 
         if (c.enroll(studentId)) {
             s.registerCourse(courseCode);
@@ -62,5 +82,14 @@ public class RegistrationSystem {
                 System.out.println("   - " + code);
             }
         }
+    }
+    // Add these two new functions to the RegistrationSystem class
+
+    public Student findStudentById(String studentId) {
+        return students.get(studentId);
+    }
+
+    public Course findCourseByCode(String courseCode) {
+        return courses.get(courseCode);
     }
 }
