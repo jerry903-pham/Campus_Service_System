@@ -109,6 +109,12 @@ class Library {
             System.out.println("Library is full. Cannot add more books.");
             return;
         }
+        for (int i = 0; i< count; i++){
+            if (books[i].title.equalsIgnoreCase(title)) {
+                System.out.println("Book already exists, please enter another title");
+                return;
+            }
+        }
         books[count++] = new Book(title, author);
         System.out.println("Book added successfully.");
     }
