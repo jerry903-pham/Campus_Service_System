@@ -1,4 +1,4 @@
-package datastructures;
+package com.greenwich.university.CourseRegistration.datastructures;
 
 @SuppressWarnings("unchecked")
 public class MyHeap<T> {

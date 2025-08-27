@@ -1,4 +1,4 @@
-package datastructures;
+package com.greenwich.university.CourseRegistration.datastructures;
 
 public class MyHashTable<K, V> {
     private static class Entry<K, V> {

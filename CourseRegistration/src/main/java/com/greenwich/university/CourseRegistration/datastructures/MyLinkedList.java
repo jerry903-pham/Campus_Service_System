@@ -1,4 +1,4 @@
-package datastructures;
+package com.greenwich.university.CourseRegistration.datastructures;
 
 import java.util.Iterator;
 

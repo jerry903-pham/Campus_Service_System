@@ -1,6 +1,6 @@
-package model;
+package com.greenwich.university.CourseRegistration.model;
 
-import datastructures.MyQueue;
+import com.greenwich.university.CourseRegistration.datastructures.MyQueue;
 
 public class Course {
     private String code;

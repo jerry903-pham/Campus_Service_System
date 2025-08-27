@@ -1,4 +1,4 @@
-package model;
+package com.greenwich.university.CourseRegistration.model;
 
 public class Registration {
     private Student student;

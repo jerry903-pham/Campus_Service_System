@@ -1,10 +1,10 @@
 package com.greenwich.university.CourseRegistration;
 
-import model.Course;
-import model.Student;
-import service.CourseManager;
-import service.RegistrationSystem;
-import util.InputValidator;
+import  com.greenwich.university.CourseRegistration.model.Course;
+import com.greenwich.university.CourseRegistration.model.Student;
+import com.greenwich.university.CourseRegistration.service.CourseManager;
+import com.greenwich.university.CourseRegistration.service.RegistrationSystem;
+import com.greenwich.university.CourseRegistration.util.InputValidator;
 
 import java.util.Scanner;
 
@@ -44,6 +44,10 @@ public class registrationMain {
                         if (!InputValidator.validateCourseCode(code)) {
                             System.out.println(" Invalid course code! Example format: CS101");
                             continue;
+                        }
+                        if (registrationSystem.findCourseByCode(code) != null) {
+                            System.out.println(" A course with this code already exists!");
+                            continue; // Go back to the admin menu
                         }
 
                         System.out.print("Enter course name: ");
@@ -103,15 +107,23 @@ public class registrationMain {
                     continue;
                 }
 
-                System.out.print("Enter student name: ");
-                String studentName = scanner.nextLine();
-                if (!InputValidator.validateName(studentName)) {
-                    System.out.println(" Invalid name! Must be at least 2 characters.");
-                    continue;
+                // --- THE FIX ---
+                // Check if student already exists. If not, ask for name and create a new one.
+                Student student = registrationSystem.findStudentById(studentId);
+                if (student == null) {
+                    System.out.print("Enter student name: ");
+                    String studentName = scanner.nextLine();
+                    if (!InputValidator.validateName(studentName)) {
+                        System.out.println(" Invalid name! Must be at least 2 characters.");
+                        continue;
+                    }
+                    student = new Student(studentId, studentName);
+                    registrationSystem.addStudent(student);
+                    System.out.println(" Welcome, new student " + studentName + "!");
+                } else {
+                    System.out.println(" Welcome back, " + student.getName() + "!");
                 }
-
-                Student student = new Student(studentId, studentName);
-                registrationSystem.addStudent(student);
+                // --- END OF FIX ---
 
                 while (true) {
                     System.out.println("\n--- Student Menu ---");
@@ -129,7 +141,7 @@ public class registrationMain {
                             System.out.println(" Invalid course code! Example: CS101");
                             continue;
                         }
-                        registrationSystem.register(studentId, courseCode);
+                        registrationSystem.register(student.getId(), courseCode);
 
                     } else if (studentChoice.equals("2")) {
                         System.out.print("Enter course code to drop: ");
@@ -138,10 +150,10 @@ public class registrationMain {
                             System.out.println(" Invalid course code! Example: CS101");
                             continue;
                         }
-                        registrationSystem.drop(studentId, courseCode);
+                        registrationSystem.drop(student.getId(), courseCode);
 
                     } else if (studentChoice.equals("3")) {
-                        registrationSystem.printStudentCourses(studentId);
+                        registrationSystem.printStudentCourses(student.getId());
 
                     } else if (studentChoice.equals("4")) {
                         break; // back to main menu
