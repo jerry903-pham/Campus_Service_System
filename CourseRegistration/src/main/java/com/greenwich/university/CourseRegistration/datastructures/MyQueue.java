@@ -1,4 +1,4 @@
-package datastructures;
+package com.greenwich.university.CourseRegistration.datastructures;
 
 public class MyQueue<T> {
     private static class Node<T> {

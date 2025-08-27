@@ -1,4 +1,4 @@
-package util;
+package com.greenwich.university.CourseRegistration.util;
 
 public class InputValidator {
     public static boolean validateId(String id) {

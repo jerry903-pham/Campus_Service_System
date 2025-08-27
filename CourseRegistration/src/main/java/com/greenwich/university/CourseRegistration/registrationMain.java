@@ -1,10 +1,10 @@
 package com.greenwich.university.CourseRegistration;
 
-import model.Course;
-import model.Student;
-import service.CourseManager;
-import service.RegistrationSystem;
-import util.InputValidator;
+import  com.greenwich.university.CourseRegistration.model.Course;
+import com.greenwich.university.CourseRegistration.model.Student;
+import com.greenwich.university.CourseRegistration.service.CourseManager;
+import com.greenwich.university.CourseRegistration.service.RegistrationSystem;
+import com.greenwich.university.CourseRegistration.util.InputValidator;
 
 import java.util.Scanner;
 

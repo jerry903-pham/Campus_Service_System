@@ -1,9 +1,9 @@
-package service;
+package com.greenwich.university.CourseRegistration.service;
 
-import datastructures.MyArray;
-import datastructures.MyComparator;
-import datastructures.MyHeap;
-import model.Course;
+import com.greenwich.university.CourseRegistration.datastructures.MyArray;
+import com.greenwich.university.CourseRegistration.datastructures.MyComparator;
+import com.greenwich.university.CourseRegistration.datastructures.MyHeap;
+import com.greenwich.university.CourseRegistration.model.Course;
 
 public class CourseManager {
     private MyArray<Course> catalog;
@@ -62,7 +62,7 @@ public class CourseManager {
     // option 4: Show courses ranked by popularity
     public void printPopularCourses() {
         MyHeap<Course> heap = new MyHeap<>(new MyComparator<>() {
-            @Override
+
             public int compare(Course a, Course b) {
                 return Integer.compare(a.getEnrolled(), b.getEnrolled());
             }

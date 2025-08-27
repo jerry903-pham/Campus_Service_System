@@ -1,8 +1,8 @@
-package service;
+package com.greenwich.university.CourseRegistration.service;
 
-import datastructures.MyHashTable;
-import model.Course;
-import model.Student;
+import com.greenwich.university.CourseRegistration.datastructures.MyHashTable;
+import com.greenwich.university.CourseRegistration.model.Course;
+import com.greenwich.university.CourseRegistration.model.Student;
 
 public class RegistrationSystem {
     private MyHashTable<String, Course> courses;

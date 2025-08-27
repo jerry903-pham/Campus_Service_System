@@ -1,6 +1,6 @@
-package model;
+package com.greenwich.university.CourseRegistration.model;
 
-import datastructures.MyLinkedList;
+import com.greenwich.university.CourseRegistration.datastructures.MyLinkedList;
 
 public class Student {
     private String id;
